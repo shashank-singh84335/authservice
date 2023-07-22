@@ -1,0 +1,73 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: authservice
+  namespace: development
+  labels:
+    app: authservice
+    service: authservice
+spec:
+  ports:
+    - port: 8000
+      name: http
+  selector:
+    app: authservice
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: authservice-deployment
+  namespace: development
+  labels:
+    app: authservice
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: authservice
+  template:
+    metadata:
+      labels:
+        app: authservice
+    spec:
+      containers:
+        - name: auth-svc
+          image: authentication:latest
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8000
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: authservice-vs
+  namespace: development
+spec:
+  hosts:
+    - "*"
+  gateways:
+    - custom-gateway
+  http:
+    - match:
+        - uri:
+            prefix: /auth/v1/admin
+        - uri:
+            prefix: /auth/v1
+        - uri:
+            prefix: /auth/v1/signup
+        - uri:
+            prefix: /auth/v1/signin
+        - uri:
+            prefix: /auth/v1/swagger
+        - uri:
+            prefix: /auth/v1/redoc
+        - uri:
+            prefix: /auth/static
+        - uri:
+            prefix: /auth/v1/forgot_password
+      route:
+        - destination:
+            host: authservice
+            port:
+              number: 8000
