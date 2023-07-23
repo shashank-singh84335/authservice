@@ -33,7 +33,7 @@ spec:
     spec:
       containers:
         - name: auth-svc
-          image: authentication:latest
+          image: authservice:latest
           imagePullPolicy: Never
           ports:
             - containerPort: 8000
@@ -47,7 +47,7 @@ spec:
   hosts:
     - "*"
   gateways:
-    - custom-gateway
+    - api-gateway
   http:
     - match:
         - uri:
