@@ -30,7 +30,7 @@ schema_view = get_schema_view(
         description="Auth Service",
         terms_of_service="https://www.google.com/policies/terms/",
         # contact=openapi.Contact(email="shashank.singh84335@gmail.com"),
-        license=openapi.License(name="Kunatam License"),
+        license=openapi.License(name="License"),
     ),
     public=True,
     permission_classes=(permissions.AllowAny,),
