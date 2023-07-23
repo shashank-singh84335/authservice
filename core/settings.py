@@ -169,8 +169,8 @@ AUTH_JWT_CONFIG = {
     "OTP_EXPIRATION_TIME": timedelta(minutes=7).seconds,
     "FORGOT_PASSWORD_RATE_LIMIT": 5,
     "LOGIN_RATE_LIMIT" : 20,
-    "SALTING_CONSTANT": "vellego_is_great",
-    "iss": "vellego.com",
+    "SALTING_CONSTANT": "shashank_blogs",
+    "iss": "shashank_blogs.com",
     "FORGOT_PASSWORD_SUB" : "reset_password",
     "ALGORITHM_OF_JWT": 'RS256',
     "ACCESS_TOKEN_EXTRA_CONFIGS": {
